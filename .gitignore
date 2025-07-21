@@ -1,0 +1,4 @@
+node_modules
+.env
+rough.js
+package-lock.json

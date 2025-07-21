@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <main class="wrapper">
+    <section class="container">
+      <div class="dialog-box">
+        <h4>Success</h4>
+        <p>Testing for the operation!</p>
+      </div>
+      <form class="form-panel">
+        <div class="input-group">
+          <label for="url">URL</label>
+          <input type="text" id="url" placeholder="Enter the URL to shorten" required autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label for="shortCode">Short Code</label>
+          <input type="text" id="shortCode" placeholder="Custom short code" required autocomplete="off">
+        </div>
+        <div class="buttons">
+          <button id="shortenBtn" type="button">
+            <i class="fa-solid fa-link"></i> Shorten
+          </button>
+          <button id="linksBtn" type="button" title="View all links">
+            <i class="fa-solid fa-list"></i>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal Overlay -->
+  <div id="linksModal" class="links-modal">
+    <div class="links-modal-content">
+      <button id="closeBtn" class="close-btn" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h4>Your Links</h4>
+      <div class="links">
+        <% links.forEach(({shortCode,url})=>{ %>
+          <div class="link-item">
+            <div class="link-top">
+              <a href="/<%= shortCode %>" target="_blank"><%= shortCode %></a>
+              <div class="link-actions">
+                <button type="button" class="copy-btn" data-code="<%= shortCode %>" title="Copy">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+                
+                <form action="/delete/<%= shortCode %>" method="POST">
+                  <button type="submit" class="delete-btn" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <p class="full-url"><%= url %></p>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
