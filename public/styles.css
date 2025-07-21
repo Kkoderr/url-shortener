@@ -6,13 +6,50 @@
   }
   
   body {
-    background: linear-gradient(135deg, #3f87a6, #ebf8e1);
+    background: linear-gradient(135deg,  #e3f0da, #aedcf0);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem;
   }
+
+  /* Navbar styling */
+.navbar {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aliceblue;   /* Dark background */
+  padding: 10px 20px;
+}
+
+.navbar-logo a {
+  color: rgb(0,0,0);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar-logo i {
+  margin-right: 8px;
+}
+
+.navbar-links a {
+  color: rgb(0,0,0);
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+
+/* main window styling */
   
   .wrapper {
     width: 100%;

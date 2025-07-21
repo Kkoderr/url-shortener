@@ -10,6 +10,12 @@ const router = Router();
 router.post('/shorten', shorten_controller);
 router.get('/load', load_controller);
 router.post("/delete/:short_code", delete_controller);
+router.get('/login',(req, res) => {
+    res.render('auth/login')
+})
+router.get('/registration',(req, res) => {
+    res.render('auth/registration')
+})
 router.get('/',async(req,res)=>{
     const data = await load_data();
     res.render('index', {links:data})
