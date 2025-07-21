@@ -1,4 +1,5 @@
 import { getLink } from "../model/getLink.js";
+import load_data from "../model/loadData.js";
 
 export const redirect_controller = async(req, res)=>{
     let url = req.url.slice(1);
@@ -10,3 +11,9 @@ export const redirect_controller = async(req, res)=>{
         res.redirect('/')
     }
 }
+
+export const home_redirect = async(req, res)=>{
+    const data = await load_data();
+    res.render('index', {links:data})
+}
+
