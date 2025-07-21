@@ -4,6 +4,7 @@ const shortCodeInput = document.getElementById("shortCode");
 const linksBtn = document.getElementById('linksBtn');
 const linksModal = document.getElementById('linksModal');
 const closeBtn = document.getElementById('closeBtn');
+const loginBtn = document.getElementById("loginBtn");
 
 const showDialogBox = (headingText, paraText) => {
   const dialogBox = document.querySelector('.dialog-box');
@@ -98,3 +99,5 @@ linksModal.addEventListener('click', (e) => {
     linksModal.style.display = 'none';
   }
 });
+
+

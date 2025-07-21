@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { home_redirect } from "../controller/redirect.controller.js";
+import { getLoginPage, login_post, logout } from "../controller/auth.controller.js";
 
 const auth_router = Router()
 
-auth_router.get('/login',(req, res) => {
-    res.render('auth/login')
-})
-auth_router.post('/login', home_redirect)
+auth_router.get('/login', getLoginPage)
+auth_router.post('/login', login_post)
+auth_router.get('/logout', logout)
 auth_router.get('/registration',(req, res) => {
     res.render('auth/registration')
 })

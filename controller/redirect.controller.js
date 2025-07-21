@@ -14,6 +14,7 @@ export const redirect_controller = async(req, res)=>{
 
 export const home_redirect = async(req, res)=>{
     const data = await load_data();
-    res.render('index', {links:data})
+    const is_logged_in = req.cookies?.is_logged_in === 'true';
+    res.render('index', {links:data, is_logged_in:is_logged_in})
 }
 

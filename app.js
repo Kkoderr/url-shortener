@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import router from './routes/app.routes.js';
 import auth_router from './routes/auth.routes.js';
 import redirect_router from './routes/redirect.routes.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 app.use(urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cookieParser())
 app.use(router)
 app.use(auth_router)
 app.use(redirect_router)
