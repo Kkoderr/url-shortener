@@ -1,6 +1,8 @@
 import express, { urlencoded } from 'express';
 import dotenv from 'dotenv';
 import router from './routes/app.routes.js';
+import auth_router from './routes/auth.routes.js';
+import redirect_router from './routes/redirect.routes.js';
 
 dotenv.config();
 
@@ -12,7 +14,8 @@ app.set('views', './views')
 app.use(urlencoded({ extended: true }))
 app.use(express.json())
 app.use(router)
-
+app.use(auth_router)
+app.use(redirect_router)
 
 app.listen(process.env.PORT || 3000, ()=>{
     console.log(`Listening at port ${process.env.PORT}`);
