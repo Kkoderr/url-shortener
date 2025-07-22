@@ -11,7 +11,15 @@
 
   <div class="register-container">
     <h2>Register</h2>
-    <form action="/register" method="POST">
+    <% if (status === 'success') { %>
+      <div class="notification success"><%= msg %></div>
+    <% } else if (status === 'failure') { %>
+      <div class="notification error"><%= msg %></div>
+    <% } %>
+    
+    <div id="registration-notification">
+    </div>
+    <form action="/register" method="post" class="registration-form">
       <div class="input-group">
         <label for="username"><i class="fa-solid fa-user"></i> Username</label>
         <input type="text" id="username" name="username" placeholder="Choose a username" required>
@@ -34,6 +42,22 @@
       Already have an account? <a href="/login">Login here</a>
     </div>
   </div>
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit',(e)=>{
+      let confirm_password = document.querySelector('#confirm-password').value;
+      let password = document.querySelector('#password').value;
+      if(password !== confirm_password){
+        e.preventDefault();
+        let notification = document.querySelector('#registration-notification');
+        notification.innerHTML = `<p>Password do not match!</p>`;
+        notification.style.display='flex';
+        setTimeout(()=>{
+          notification.style.display = 'none';
+        }, 2000);
+      }
+    });
+  </script>
 
 </body>
 </html>

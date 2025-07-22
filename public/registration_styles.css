@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -7,6 +11,38 @@ body {
     justify-content: center;
     align-items: center;
   }
+
+  #registration-notification {
+    display: none;                    
+    justify-content: center;         
+    align-items: center;              
+    color: grey;
+    margin-block: 15px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .notification {
+    margin-block: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .notification.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+ 
 
   .register-container {
     background-color: white;
@@ -23,8 +59,13 @@ body {
     color: #333;
   }
 
+  .registration-form{
+    width: 100%;
+  }
+
   .input-group {
     margin-bottom: 18px;
+    width: 100%;
   }
 
   .input-group label {
