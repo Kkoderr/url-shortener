@@ -22,3 +22,11 @@ app.use(redirect_router)
 app.listen(process.env.PORT || 3000, ()=>{
     console.log(`Listening at port ${process.env.PORT}`);
 })
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('💥 Unhandled Rejection:', reason);
+  });
+  process.on('uncaughtException', (err) => {
+    console.error('💥 Uncaught Exception:', err);
+  });
+  

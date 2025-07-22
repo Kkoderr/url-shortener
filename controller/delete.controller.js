@@ -1,5 +1,5 @@
-import { getClient } from "../config/dbClient.js";
-import { deleteLink } from "../model/deleteData.js";
+// import { deleteLink } from "../model/deleteData.js";
+import { deleteLink } from "../model/deleteData(drizzle).js";
 
 export const delete_controller = async (req, res) => {
   try {

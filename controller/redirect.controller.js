@@ -1,5 +1,7 @@
-import { getLink } from "../model/getLink.js";
-import load_data from "../model/loadData.js";
+// import { getLink } from "../model/getLink.js";
+import { getLink } from "../model/getLink(drizzle).js";
+// import load_data from "../model/loadData.js";
+import load_data from "../model/loadData(drizzle).js";
 
 export const redirect_controller = async(req, res)=>{
     let url = req.url.slice(1);

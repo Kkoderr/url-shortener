@@ -1,4 +1,4 @@
-import { getClient } from "../config/dbClient.js";
+import { getClient } from "../config/dbClient(mysql).js";
 
 export const getLink= async(shortCode)=>{
     const client = await getClient();

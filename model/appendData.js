@@ -1,4 +1,4 @@
-import {getClient} from "../config/dbClient.js"
+import {getClient} from "../config/dbClient(mysql).js"
 
 const append_data = async(data)=>{
     const client = await getClient();

@@ -1,4 +1,5 @@
-import append_data from "../model/appendData.js";
+// import append_data from "../model/appendData.js";
+import { append_data } from "../model/appendData(drizzle).js";
 
 const shorten_controller = async(req, res)=>{
     let data = req.body;
