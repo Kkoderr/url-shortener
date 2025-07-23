@@ -6,10 +6,12 @@
   }
   
   body {
-    background: linear-gradient(135deg,  #e3f0da, #aedcf0);
+    background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 5em;
     align-items: center;
     padding: 2rem;
   }
@@ -55,6 +57,7 @@
   text-decoration: none;
   font-size: 16px;
 }
+
 
 /* main window styling */
   

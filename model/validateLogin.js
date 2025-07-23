@@ -12,9 +12,9 @@ const check_password = async (password, encrypted_password) => {
     }
 }
 
-export const validate_login = async(username, password)=>{
+export const validate_login = async(email, password)=>{
     try{
-        let data = await db.select().from(users).where(eq(users.name, username));
+        let data = await db.select().from(users).where(eq(users.email, email));
         if(data.length > 0) {
             if(await check_password(password, data[0].password)){
                 return [true,'User authenticated!',{'id':data[0].id, 'name':data[0].name, 'email':data[0].email}];
@@ -22,7 +22,7 @@ export const validate_login = async(username, password)=>{
                 return [false, 'Password incorect!',{}]
             }
         }
-        return [false,'Username not found!',{}];
+        return [false,'Email not found!',{}];
         
     }catch(e){
         console.log(e)

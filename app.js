@@ -12,17 +12,22 @@ dotenv.config();
 const app = express();
 
 app.use(cookieParser())
-app.use(verifyAuthentication) 
-app.use(express.static('./public'))
-app.set('view engine', 'ejs')
-app.set('views', './views')
-app.use(urlencoded({ extended: true }))
-app.use(express.json())
 app.use(session({
     secret: 'mySecretKey',
     resave: false,
     saveUninitialized: true
 }))
+app.use(verifyAuthentication) 
+app.use((req,res,next)=>{
+    // This middleware use locals which make its member accessbile in all ejs without passing them.
+    res.locals.user = req.user;
+    next();
+});
+app.use(express.static('./public'))
+app.set('view engine', 'ejs')
+app.set('views', './views')
+app.use(urlencoded({ extended: true }))
+app.use(express.json())
 app.use(router)
 app.use(auth_router)
 app.use(redirect_router)

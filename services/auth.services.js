@@ -13,7 +13,7 @@ export const generate_token = ({id, name, email})=>{
 
 export const login_post= async(req,res)=>{
     // res.setHeader('Set-Cookie', "isLoggedIn=true; path=/;")
-    let isValid = await validate_login(req.body.username, req.body.password);
+    let isValid = await validate_login(req.body.email, req.body.password);
     if(isValid[0]){
         let jwt_token = generate_token(isValid[2]);
         res.cookie('access_token',jwt_token);
@@ -49,6 +49,6 @@ export const register = async(req,res)=>{
         res.render("auth/registration",{status: status_info.status, msg:status_info.msg});
     }catch(e){
         console.log(e);
-        res.status(500).send(e.message);
+        res.render('auth/registration',{status:status_info, msg:e});
     }
 }

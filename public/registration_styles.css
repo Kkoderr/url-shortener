@@ -5,7 +5,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4A90E2, #007AFF);
+    background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -50,7 +50,7 @@ body {
     border-radius: 8px;
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 0px 16px rgba(0,0,0,0.2);
   }
 
   .register-container h2 {

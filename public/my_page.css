@@ -5,9 +5,24 @@
     font-family: "Segoe UI", Roboto, sans-serif;
 }
 
+body{
+    background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .scroll-box {
     max-height: 300px;
     overflow-y: auto;
+}
+.scroll-box::-webkit-scrollbar{
+    display: none;
 }
 .url-input {
     width: 100%;

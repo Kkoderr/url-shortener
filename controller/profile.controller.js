@@ -3,7 +3,7 @@ import load_data from "../model/loadData(drizzle).js";
 export const get_profile_page = async(req,res)=>{
     console.log('Triggered!!')
     if(!req.cookies.is_logged_in){
-        return res.render('')
+        return res.redirect('/');
     }
     const user = req.user;
     const links = await load_data();

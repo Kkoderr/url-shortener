@@ -9,12 +9,16 @@
 </head>
 <body>
   <%- include('navbar') %>
-  <main class="wrapper">
-    <section class="container">
-      <div class="dialog-box">
+  
+  
+  <main class="wrapper mt-4">
+    <div class="container">
+
+      <div class="dialog-box success mb-4">
         <h4>Success</h4>
         <p>Testing for the operation!</p>
       </div>
+
       <form class="form-panel">
         <div class="input-group">
           <label for="url">URL</label>
@@ -24,16 +28,16 @@
           <label for="shortCode">Short Code</label>
           <input type="text" id="shortCode" placeholder="Custom short code" required autocomplete="off">
         </div>
-        <div class="buttons">
-          <button id="shortenBtn" type="button">
+        <div class="buttons d-flex gap-2 mt-3">
+          <button id="shortenBtn" type="button" class="btn btn-primary">
             <i class="fa-solid fa-link"></i> Shorten
           </button>
-          <button id="linksBtn" type="button" title="View all links">
+          <button id="linksBtn" type="button" class="btn btn-outline-secondary" title="View all links">
             <i class="fa-solid fa-list"></i>
           </button>
         </div>
       </form>
-    </section>
+    </div>
   </main>
 
   <!-- Modal Overlay -->
@@ -42,25 +46,24 @@
       <button id="closeBtn" class="close-btn" title="Close">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <h4>Your Links</h4>
-      <div class="links">
-        <% links.forEach(({id,shortCode,url})=>{ %>
-          <div class="link-item">
-            <div class="link-top">
-              <a href="/<%= shortCode %>" target="_blank"><%= shortCode %></a>
-              <div class="link-actions">
-                <button type="button" class="copy-btn" data-code="<%= shortCode %>" title="Copy">
+      <h4 class="modal-title mb-3">Your Links</h4>
+      <div class="links-list">
+        <% links.forEach(({ id, shortCode, url }) => { %>
+          <div class="link-item mb-2">
+            <div class="link-top d-flex justify-content-between align-items-center">
+              <a href="/<%= shortCode %>" target="_blank" class="shortcode-link"><%= shortCode %></a>
+              <div class="link-actions d-flex gap-2">
+                <button type="button" class="copy-btn btn btn-sm btn-light" data-code="<%= shortCode %>" title="Copy">
                   <i class="fa-solid fa-copy"></i>
                 </button>
-                
                 <form action="/delete/<%= shortCode %>" method="POST">
-                  <button type="submit" class="delete-btn" title="Delete">
+                  <button type="submit" class="delete-btn btn btn-sm btn-danger" title="Delete">
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </form>
               </div>
             </div>
-            <p class="full-url"><%= url %></p>
+            <p class="full-url text-break small text-muted mb-0"><%= url %></p>
           </div>
         <% }); %>
       </div>
