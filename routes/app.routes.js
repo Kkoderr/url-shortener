@@ -1,5 +1,5 @@
 import { Router } from "express";
-import shorten_controller from "../controller/shorten.controller.js";
+import shorten_controller from "../services/shorten.services.js";
 import load_controller from "../controller/load.controller.js";
 import { delete_controller } from "../controller/delete.controller.js";
 

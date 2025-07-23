@@ -11,6 +11,9 @@
 
   <div class="login-container">
     <h2>Login</h2>
+    <% if(status=='failure'){%>
+      <div class="notification error"><%= msg %></div>
+    <%}%>
     <form action="/login" method="POST">
       <div class="input-group">
         <label for="username"><i class="fa-solid fa-user"></i> Username</label>

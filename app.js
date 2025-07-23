@@ -4,6 +4,7 @@ import router from './routes/app.routes.js';
 import auth_router from './routes/auth.routes.js';
 import redirect_router from './routes/redirect.routes.js';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 dotenv.config();
 
@@ -15,6 +16,11 @@ app.set('views', './views')
 app.use(urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
+app.use(session({
+    secret: 'mySecretKey',
+    resave: false,
+    saveUninitialized: true
+}))
 app.use(router)
 app.use(auth_router)
 app.use(redirect_router)
