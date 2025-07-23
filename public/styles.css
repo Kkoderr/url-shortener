@@ -49,6 +49,13 @@
   text-decoration: underline;
 }
 
+.navbar-links p{
+  color: rgb(0,0,0);
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
 /* main window styling */
   
   .wrapper {

@@ -6,7 +6,7 @@ const shorten_controller = async(req, res)=>{
     data.shortCode = data.shortCode.replace(' ', '_');
     try{
         await append_data(data);
-        res.status(200).send('Link Shortened!');
+        res.redirect('/');
     }catch(e){
         res.status(500).send(e.message);
     }

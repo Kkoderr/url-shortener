@@ -1,4 +1,5 @@
 // import { getLink } from "../model/getLink.js";
+import { verifyAuthentication } from "../middlewares/verify-auth.middleware.js";
 import { getLink } from "../model/getLink(drizzle).js";
 // import load_data from "../model/loadData.js";
 import load_data from "../model/loadData(drizzle).js";
@@ -10,13 +11,15 @@ export const redirect_controller = async(req, res)=>{
         console.log('Redirecting to ',data[0].url);
         res.redirect(data[0].url);
     }else{
-        res.redirect('/')
+        console.log('Failed to Redirect!');
+        res.redirect('/');
     }
 }
 
 export const home_redirect = async(req, res)=>{
     const data = await load_data();
     const is_logged_in = req.cookies?.is_logged_in === 'true';
-    res.render('index', {links:data, is_logged_in:is_logged_in})
+    const email = req.user?.email || "";
+    res.render('index', {links:data, is_logged_in, email})
 }
 

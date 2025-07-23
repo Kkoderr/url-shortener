@@ -14,7 +14,8 @@
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
             <% if(is_logged_in){ %>
-                <a href="/logout">Logout</a>
+                <a href="/my_page"><%= email %></a>
+                <a href="/logout" style="color:red; font-weight:500;">Logout</a>
             <%}else{%>
                 <a href="/login">Login</a>
             <% } %>
