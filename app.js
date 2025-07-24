@@ -6,6 +6,7 @@ import redirect_router from './routes/redirect.routes.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import {verifyAuthentication} from "./middlewares/verify-auth.middleware.js";
+import flash from 'connect-flash';
 
 dotenv.config();
 
@@ -14,9 +15,10 @@ const app = express();
 app.use(cookieParser())
 app.use(session({
     secret: 'mySecretKey',
-    resave: false,
-    saveUninitialized: true
+    resave: true, 
+    saveUninitialized: false
 }))
+app.use(flash());
 app.use(verifyAuthentication) 
 app.use((req,res,next)=>{
     // This middleware use locals which make its member accessbile in all ejs without passing them.

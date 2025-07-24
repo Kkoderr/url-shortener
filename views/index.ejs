@@ -48,7 +48,7 @@
       </button>
       <h4 class="modal-title mb-3">Your Links</h4>
       <div class="links-list">
-        <% links.forEach(({ id, shortCode, url }) => { %>
+        <% links.forEach(({ id, shortCode, url, userId }) => { %>
           <div class="link-item mb-2">
             <div class="link-top d-flex justify-content-between align-items-center">
               <a href="/<%= shortCode %>" target="_blank" class="shortcode-link"><%= shortCode %></a>
@@ -56,11 +56,6 @@
                 <button type="button" class="copy-btn btn btn-sm btn-light" data-code="<%= shortCode %>" title="Copy">
                   <i class="fa-solid fa-copy"></i>
                 </button>
-                <form action="/delete/<%= shortCode %>" method="POST">
-                  <button type="submit" class="delete-btn btn btn-sm btn-danger" title="Delete">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </form>
               </div>
             </div>
             <p class="full-url text-break small text-muted mb-0"><%= url %></p>

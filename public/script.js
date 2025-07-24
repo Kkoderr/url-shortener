@@ -60,19 +60,18 @@ shortenBtn.addEventListener('click', async (event) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url, shortCode }),
     });
+    console.log(response)
 
     if (response.status === 200) {
       showDialogBox("Success", "The URL has been shortened!");
       urlInput.value = "";
       shortCodeInput.value = "";
-    } else if (response.status === 400) {
-      showDialogBox("Error", "Invalid input or short code already exists!");
-    } else {
-      showDialogBox("Error", "Unexpected server response.");
+    }else {
+      showDialogBox("Error", await response.text());
     }
   } catch (error) {
     console.error("Error while shortening URL:", error);
-    showDialogBox("Error", "Failed to shorten URL. Please try again.");
+    showDialogBox("Error", error.message);
   }
 });
 
@@ -85,8 +84,8 @@ linksBtn.addEventListener('click', async () => {
       showDialogBox('Error', 'Unable to load links from server.');
     }
   } catch (error) {
-    console.error("Error loading links:", error);
-    showDialogBox('Error', 'Network error while loading links.');
+    console.error("Error loading links");
+    showDialogBox('Error', error.message);
   }
 });
 
