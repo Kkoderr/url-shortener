@@ -5,11 +5,11 @@ const shorten_controller = async(req, res)=>{
     let data = req.body;
     data.shortCode = data.shortCode.replace(' ', '_');
     try{
-        if(req.cookies?.is_logged_in !== true){
+        if(req.cookies?.is_logged_in !== 'true'){
             console.log('Login required!');
             return res.status(401).send('Login Required!');
         }
-        await append_data(data);
+        await append_data(data, req.user?.id);
         return res.status(200).send('Link Shortened!');
     }catch(e){
         if(e.message === 'ShortCode already present!')

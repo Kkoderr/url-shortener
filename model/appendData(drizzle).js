@@ -16,7 +16,7 @@ export const append_data = async(data, user_id)=>{
     }
     try{
         if(data.shortCode===''){
-            throw new Error("Error updating the db!");
+            throw new Error("Short code should be non empty!");
         }
         await db.insert(mapping2).values({shortCode: data.shortCode, url: data.url, userId:user_id});
         return true;

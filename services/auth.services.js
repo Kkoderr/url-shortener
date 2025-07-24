@@ -1,7 +1,10 @@
-import { add_user } from "../model/addUser.js";
-import { validate_login } from "../model/validateLogin.js";
 import jwt from 'jsonwebtoken';
+
+import { add_user } from "../model/addUser.js";
 import { registerUserSchema } from "../validation/auth-schema.js";
+import { validate_login } from "../model/validateLogin.js";
+import { sessionTable } from '../drizzle/schema.js';
+import { db } from '../config/dbClient(drizzle).js';
 
 export const generate_token = ({id, name, email})=>{
     return  jwt.sign(
@@ -10,7 +13,34 @@ export const generate_token = ({id, name, email})=>{
         {
             expiresIn: '30d',
         });
-}
+};
+
+const createSession = async(userId, {ip, userAgent})=>{
+    const [session] = await db.insert(sessionTable).values({
+        user_id: userId,
+        ip,
+        userAgent
+    }).$returningId();
+    return session;
+};
+
+export const createAccessToken = ( {id, name, email, sessionId})=>{
+    return jwt.sign({id,name,email,sessionId},
+        process.env.JWT_SECRET,
+        {
+            expiresIn: "1m",
+        }
+    )
+};
+
+const createRefreshToken = (sessionId)=>{
+    return jwt.sign({sessionId},
+        process.env.JWT_SECRET,
+        {
+            expiresIn: "5m",
+        }
+    )
+};
 
 export const login_post= async(req,res)=>{
     // res.setHeader('Set-Cookie', "isLoggedIn=true; path=/;")
@@ -18,8 +48,36 @@ export const login_post= async(req,res)=>{
         const { email, password } = req.body;
         let isValid = await validate_login(email, password);
         if (isValid[0]) {
-            let jwt_token = generate_token(isValid[2]);
-            res.cookie('access_token', jwt_token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+            // let jwt_token = generate_token(isValid[2]);
+            console.log(isValid);
+            let user = isValid[2];
+            
+            const session = await createSession(user.id, {
+                ip: req.clientIp,
+                userAgent: req.headers['user-agent']
+            });
+
+            const access_token = createAccessToken({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                sessionId: session.id
+            });
+            
+            const refresh_token = createRefreshToken(session.id);
+
+            // res.cookie('access_token', jwt_token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
+            const baseConfig = {httpOnly: true, secure: true};
+
+            res.cookie('access_token', access_token, {
+                ...baseConfig,
+                maxAge: 1*60*1000,
+            });
+            res.cookie('refresh_token', refresh_token, {
+                ...baseConfig,
+                maxAge: 5 * 60 * 1000
+            });
             res.cookie('is_logged_in', true);
             return res.redirect('/');
         } else {
@@ -51,6 +109,7 @@ export const logout = (req,res)=>{
             console.error('Failed to destroy session:', err);
         }
         res.clearCookie('access_token');
+        res.clearCookie('refresh_token');
         res.cookie('is_logged_in',false);
         res.clearCookie('connect.sid', {path: '/'});
         return res.redirect("/");
