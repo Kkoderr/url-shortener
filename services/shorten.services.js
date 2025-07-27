@@ -3,7 +3,7 @@ import { append_data } from "../model/appendData(drizzle).js";
 
 const shorten_controller = async(req, res)=>{
     let data = req.body;
-    data.shortCode = data.shortCode.replace(' ', '_');
+    data.shortCode = data.shortCode.replaceAll(' ', '_');
     try{
         if(req.cookies?.is_logged_in !== 'true'){
             console.log('Login required!');

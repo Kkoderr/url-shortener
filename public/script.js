@@ -66,6 +66,9 @@ shortenBtn.addEventListener('click', async (event) => {
       showDialogBox("Success", "The URL has been shortened!");
       urlInput.value = "";
       shortCodeInput.value = "";
+      setTimeout(()=>{
+        location.reload();
+      },2000);
     }else {
       showDialogBox("Error", await response.text());
     }

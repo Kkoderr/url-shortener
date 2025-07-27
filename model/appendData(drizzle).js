@@ -7,7 +7,7 @@ export const append_data = async(data, user_id)=>{
         throw new Error("ShortCode cannot be empty!");
     }
     try{
-        const query1 = await db.select().from(mapping2).where(and(eq(mapping2.shortCode, data.shortCode), eq(mapping2.userId, user_id)));
+        const query1 = await db.select().from(mapping2).where(eq(mapping2.shortCode, data.shortCode));
         if(query1.length > 0){
             throw new Error('ShortCode already present!')
         }

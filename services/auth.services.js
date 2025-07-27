@@ -5,6 +5,7 @@ import { registerUserSchema } from "../validation/auth-schema.js";
 import { validate_login } from "../model/validateLogin.js";
 import { sessionTable } from '../drizzle/schema.js';
 import { db } from '../config/dbClient(drizzle).js';
+import { eq } from 'drizzle-orm';
 
 export const generate_token = ({id, name, email})=>{
     return  jwt.sign(
@@ -42,10 +43,8 @@ const createRefreshToken = (sessionId)=>{
     )
 };
 
-export const login_post= async(req,res)=>{
-    // res.setHeader('Set-Cookie', "isLoggedIn=true; path=/;")
+const login = async(req, res, {email, password})=>{
     try {
-        const { email, password } = req.body;
         let isValid = await validate_login(email, password);
         if (isValid[0]) {
             // let jwt_token = generate_token(isValid[2]);
@@ -93,6 +92,16 @@ export const login_post= async(req,res)=>{
     }
 }
 
+export const login_post= async(req,res)=>{
+    // res.setHeader('Set-Cookie', "isLoggedIn=true; path=/;")
+    try{
+        const { email, password } = req.body;
+        await login(req, res, {email, password});
+    }catch(e){
+        console.error(e);
+    }
+}
+
 export const getLoginPage=(req,res)=>{
     const status = req.flash('status')[0];
     const msg = req.flash('error_msg')[0];
@@ -103,11 +112,19 @@ export const getLoginPage=(req,res)=>{
     }
 }
 
+const clearUserSession = async(sessionId)=>{
+    await db.delete(sessionTable).where(eq(sessionTable.id, sessionId));
+}
+
 export const logout = (req,res)=>{
     req.session.destroy(err => {
         if(err){
             console.error('Failed to destroy session:', err);
         }
+        const refresh_token = req.cookies.refresh_token;
+        const decodedRefreshCode = jwt.verify(refresh_token, process.env.JWT_SECRET);
+        let sessionId = decodedRefreshCode.sessionId;
+        clearUserSession(sessionId);
         res.clearCookie('access_token');
         res.clearCookie('refresh_token');
         res.cookie('is_logged_in',false);
@@ -133,7 +150,8 @@ export const register = async(req,res)=>{
         const status_info = await add_user(data);
         req.flash('register_status',status_info.status);
         req.flash("register_msg", status_info.msg);
-        return res.redirect('/registration');
+        await login(req,res,{'email':data.email, 'password':data.password});
+        return res.redirect("/");
     }catch(e){
         console.log(e);
         req.flash('register_status','failure');

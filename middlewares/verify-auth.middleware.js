@@ -40,8 +40,8 @@ export const verifyAuthentication = async(req,res,next)=>{
         try{
             const decodedRefreshCode = jwt.verify(refresh_token, process.env.JWT_SECRET);
             let sessionId = decodedRefreshCode.sessionId;
-            
             let user_id_row = await get_userId_from_sesssionId(sessionId);
+            console.log(user_id_row)
             if(!user_id_row){
                 req.user = null;
                 console.log("User not present (access_token failed)!")
