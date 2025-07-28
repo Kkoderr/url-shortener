@@ -35,17 +35,29 @@ Features include user authentication, link management dashboard, profile customi
 ---
 
 ## 📂 Project Structure
+
 url-shortener/
+
 ├── controller/ # Route controllers
+
 ├── middlewares/ # Auth & verification middlewares
+
 ├── model/ # DB models & data access
+
 ├── routes/ # App and auth routes
+
 ├── services/ # Token generation and helper services
+
 ├── views/ # EJS templates
+
 │ └── profile/ # Profile-related views
+
 ├── public/ # Static assets & CSS
+
 ├── drizzle.config.js # Drizzle ORM config
+
 ├── server.js # Entry point
+
 └── package.json
 
 ---
