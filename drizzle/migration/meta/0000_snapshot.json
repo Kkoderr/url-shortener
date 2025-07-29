@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "b4ad834f-b798-46a2-bf10-84354e70e8a0",
+  "id": "357e48e4-9275-4a5b-a267-ce0e29d3f2c9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "email_verification": {
@@ -251,7 +251,8 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false
+          "autoincrement": false,
+          "default": "('/img/default-profile-url.png')"
         },
         "created_at": {
           "name": "created_at",

@@ -55,8 +55,10 @@ export const verifyAuthentication = async(req,res,next)=>{
                 return next();
             }
             req.user = {...user, sessionId};
-            res.locals.isVerified = user.isVerified;
-            res.locals.profileUrl = user.profilePic;
+            // res.locals.isVerified = user.isVerified;
+            // res.locals.profileUrl = user.profilePic;
+            res.cookie('isVerified', user.isVerified);
+            res.cookie("profileUrl", user.profilePic);
             console.log(user);
             const new_access_token = createAccessToken(req.user);
             res.cookie('access_token', new_access_token, {

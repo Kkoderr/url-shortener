@@ -8,7 +8,7 @@ export const users = mysqlTable("users", {
     email: text("email").notNull(),
     password: text('password').notNull(),
     isVerified: boolean('is_verified').default(false),
-    profilePic: text('profile_pic'),
+    profilePic: text('profile_pic').default('/img/default-profile-url.png'),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull().onUpdateNow()
 });

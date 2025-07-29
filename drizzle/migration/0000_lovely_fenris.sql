@@ -31,7 +31,7 @@ CREATE TABLE `users` (
 	`email` text NOT NULL,
 	`password` text NOT NULL,
 	`is_verified` boolean DEFAULT false,
-	`profile_pic` text,
+	`profile_pic` text DEFAULT ('/img/default-profile-url.png'),
 	`created_at` timestamp NOT NULL DEFAULT (now()),
 	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT `users_id` PRIMARY KEY(`id`)

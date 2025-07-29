@@ -63,6 +63,7 @@ const login = async(req, res, {email, password})=>{
             });
             
             const refresh_token = createRefreshToken(session.id);
+            console.log(user);
 
             // res.cookie('access_token', jwt_token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
@@ -124,6 +125,8 @@ export const logout = async(req,res)=>{
         const decodedRefreshCode = jwt.verify(refresh_token, process.env.JWT_SECRET);
         let sessionId = decodedRefreshCode.sessionId;
         await clearUserSession(sessionId);
+        res.clearCookie('profileUrl');
+        res.clearCookie('isVerified');
         res.clearCookie('access_token');
         res.clearCookie('refresh_token');
         res.cookie('is_logged_in',false);

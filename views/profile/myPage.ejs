@@ -16,46 +16,48 @@
     <div class="card shadow rounded-4 pb-4">
       <div class="card-body" style="width:50vw;">
 
-        <div class="d-flex align-items-center mb-3 gap-3 flex-wrap">
+        <div class="d-flex align-items-center mb-3 gap-4 flex-wrap">
           <!-- profile pic and upload in a vertical column -->
           <div class="d-flex flex-column align-items-center">
-            <img 
-              src="<%= user.profilePicUrl || '/default-profile.png' %>" 
-              alt="Profile Picture" 
-              class="rounded-circle shadow"
-              style="width: 80px; height: 80px; object-fit: cover;"
-            >
-            <%=locals.profileUrl%>
-            <% if (locals.profileUrl===null){ %>
+            
+            
               <form action="/upload-profile-pic" method="POST" enctype="multipart/form-data" class="mt-2">
-                <label class="btn btn-sm btn-outline-primary mb-0 ">
-                  <i class="fa-solid fa-upload"></i> Upload Image
-                  <input 
-                    type="file" 
-                    name="profilePic" 
-                    accept="image/*"
-                    class="d-none"
-                    onchange="this.form.submit()" 
+                <label class="btn btn-sm mb-0 ">
+                  <img 
+                  src="<%= profileUrl %>" 
+                  alt="Profile Picture" 
+                  class="rounded-circle"
+                  style="width: 70px; height: 70px; object-fit: cover;"
                   >
+                  <input 
+                  type="file" 
+                  name="profilePic" 
+                  accept="image/*"
+                  class="d-none"
+                  onchange="this.form.submit()" 
+                  >
+                  <p class="text-muted text-sm-center m-0">Upload Pic</p>
                 </label>
               </form>
-            <%}%>
           </div>
         
           <!-- name and verification badge -->
           <div class="d-flex gap-1 flex-wrap flex-column justify-content-between">
-            <h3 class="card-title mb-0 text-primary"><%= user.name %></h3>
-            <% if (!locals.isVerified) { %>
-              <form action="/verify-email" method="GET">
-                <button type="submit" class="btn btn-sm btn-warning d-flex align-items-center gap-1">
-                  <i class="fa-solid fa-circle-exclamation"></i> Verify Email
-                </button>
-              </form>
-            <% } else { %>
-              <span class="badge bg-success d-flex align-items-center gap-1">
-                <i class="fa-solid fa-check-circle"></i> Verified
-              </span>
-            <% } %>
+            <h4 class="mb-0 text-primary"><%= user.name %></h4>
+            <span class="d-flex gap-2">
+              <h6 class=" text-muted"><%=  user.email %></h6> 
+              <% if (!isVerified) { %>
+                <form action="/verify-email" method="GET">
+                  <button type="submit" class="border-0 d-flex align-items-center gap-1 mt-1">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                  </button>
+                </form>
+              <% } else { %>
+                <span class="d-flex align-items-center gap-1 mt-1">
+                  <i class="fa-solid fa-check-circle"></i>
+                </span>
+              <% } %>             
+            </span>
           </div>
         </div>
               
