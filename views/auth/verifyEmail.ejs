@@ -13,6 +13,15 @@
     body {
         background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
     }
+    @keyframes bg{
+      0%{
+          background-position: 0% 50%;
+      }50%{
+          background-position: 100% 100%;
+      }100%{
+          background-position: 0% 50%;
+      }
+    }
     .card {
       max-width: 400px;
       margin: auto;
@@ -58,13 +67,15 @@
                 </div>
               </form>
       
+              
               <form action="/resend-verification-email" method="POST">
                 <button type="submit" class="btn btn-link btn-sm">
                   Didn't get the email? Resend verification
                 </button>
               </form>
-              
-              <a href="/my_page" class="btn btn-outline-secondary btn-sm mt-3">← Back</a>
+
+              <a href="/my_page" class="btn btn-outline-secondary mt-3">←</a>
+
             </div>
           </div>
         </div>

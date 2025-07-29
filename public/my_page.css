@@ -1,15 +1,15 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: "Segoe UI", Roboto, sans-serif;
 }
 
-body{
-    background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
+body {
+    background: linear-gradient(135deg,  #edf4e8, #d7e6ed);   
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,7 +21,7 @@ body{
     max-height: 300px;
     overflow-y: auto;
 }
-.scroll-box::-webkit-scrollbar{
+.scroll-box::-webkit-scrollbar {
     display: none;
 }
 .url-input {
@@ -29,50 +29,50 @@ body{
 }
 
 .navbar {
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: aliceblue;   /* Dark background */
-    padding: 10px 20px;
-  }
-  
-  .navbar-logo a {
-    color: rgb(0,0,0);
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .navbar-logo i {
-    margin-right: 8px;
-  }
-  
-  .navbar-links a {
-    color: rgb(0,0,0);
-    margin-left: 15px;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .navbar-links a:hover {
-    text-decoration: underline;
-  }
-  
-  .navbar-links p{
-    color: rgb(0,0,0);
-    margin-left: 15px;
-    text-decoration: none;
-    font-size: 16px;
-  }
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aliceblue;   /* Dark background */
+  padding: 10px 20px;
+}
 
-  .delete-btn {
-    background: none;
-    border: none;
-    color: #c00;
-    cursor: pointer;
-    font-size: 1rem;
-  }
+.navbar-logo a {
+  color: rgb(0,0,0);
+  text-decoration: none;
+  font-size: 21px;
+  font-weight: bolder;
+}
+
+.navbar-logo i {
+  margin-right: 8px;
+}
+
+.navbar-links a {
+  color: rgb(0,0,0);
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar-links a:hover {
+  text-shadow: 0 0 1px;
+}
+
+.navbar-links p {
+  color: rgb(0,0,0);
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #c00;
+  cursor: pointer;
+  font-size: 1rem;
+}

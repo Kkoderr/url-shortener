@@ -6,7 +6,9 @@
   }
   
   body {
-    background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
+    background: linear-gradient(-45deg, #4158D0, #e568dc, #ffb374,  #ef5f5f, #d840b6 );
+    background-size: 400% 400%;
+    animation: bg 12s ease infinite;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,6 +16,16 @@
     gap: 5em;
     align-items: center;
     padding: 2rem;
+  }
+
+  @keyframes bg{
+    0%{
+        background-position: 0% 50%;
+    }50%{
+        background-position: 100% 100%;
+    }100%{
+        background-position: 0% 50%;
+    }
   }
 
   /* Navbar styling */
@@ -25,15 +37,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: aliceblue;   /* Dark background */
   padding: 10px 20px;
+  background-color: rgba(255,255,255,0.5);
 }
 
 .navbar-logo a {
   color: rgb(0,0,0);
   text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 21px;
+  font-weight: bolder;
 }
 
 .navbar-logo i {
@@ -48,7 +60,7 @@
 }
 
 .navbar-links a:hover {
-  text-decoration: underline;
+  text-shadow: 0 0 1px ;
 }
 
 .navbar-links p{
@@ -64,7 +76,8 @@
   .wrapper {
     width: 100%;
     max-width: 500px;
-    background: white;
+    background-image: linear-gradient(120deg, rgba(255,255,255,0.7), rgba(255,255,255,0.2));
+    background-size: 23px;
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -94,6 +107,7 @@
   .input-group{
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   
   .input-group label {
@@ -104,12 +118,14 @@
   .input-group input {
     width: 75%;
     padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid transparent;
+    border-radius: 10px;
     transition: border-color 0.2s;
   }
   
   .input-group input:focus {
+    
     border-color: #3f87a6;
     outline: none;
   }

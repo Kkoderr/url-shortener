@@ -11,12 +11,14 @@
             <a href="/"><i class="fa-solid fa-scissors"></i> URL Shortener</a>
         </div>
         <div class="navbar-links">
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+            <a href="/">Home</a>
             <% if(is_logged_in){ %>
                 <a href="/my_page">Profile</a>
-                <a href="/logout" style="color:red; font-weight:500;">Logout</a>
-            <%}else{%>
+            <% } %>
+            <a href="/about">About</a>
+            <% if(is_logged_in){ %>
+                <a href="/logout" style="color:red; font-weight:600;">Logout</a>
+            <% }else{ %>
                 <a href="/login">Login</a>
             <% } %>
         </div>
