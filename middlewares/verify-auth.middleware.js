@@ -55,11 +55,14 @@ export const verifyAuthentication = async(req,res,next)=>{
                 return next();
             }
             req.user = {...user, sessionId};
+            res.locals.isVerified = user.isVerified;
+            res.locals.profileUrl = user.profilePic;
+            console.log(user);
             const new_access_token = createAccessToken(req.user);
             res.cookie('access_token', new_access_token, {
                 ...baseConfig,
                 maxAge: 1*60*1000,
-            });
+        });
             res.cookie('is_logged_in', true);
             console.log('New Access Token!')
             return next();
@@ -78,6 +81,7 @@ export const verifyAuthentication = async(req,res,next)=>{
         const decodedAccessCode = jwt.verify(access_token, process.env.JWT_SECRET);
         if(decodedAccessCode) {
             req.user = decodedAccessCode;
+            // console.log(decodedAccessCode);
             res.cookie('is_logged_in', true);
         }
     }catch(e){

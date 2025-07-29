@@ -38,7 +38,7 @@ const createRefreshToken = (sessionId)=>{
     return jwt.sign({sessionId},
         process.env.JWT_SECRET,
         {
-            expiresIn: "5m",
+            expiresIn: "1hr",
         }
     )
 };
@@ -48,7 +48,7 @@ const login = async(req, res, {email, password})=>{
         let isValid = await validate_login(email, password);
         if (isValid[0]) {
             // let jwt_token = generate_token(isValid[2]);
-            console.log(isValid);
+            console.log(isValid[2]);
             let user = isValid[2];
             
             const session = await createSession(user.id, {
@@ -60,7 +60,6 @@ const login = async(req, res, {email, password})=>{
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                sessionId: session.id
             });
             
             const refresh_token = createRefreshToken(session.id);
@@ -75,7 +74,7 @@ const login = async(req, res, {email, password})=>{
             });
             res.cookie('refresh_token', refresh_token, {
                 ...baseConfig,
-                maxAge: 5 * 60 * 1000
+                maxAge: 60 * 60 * 1000
             });
             res.cookie('is_logged_in', true);
             return res.redirect('/');
@@ -116,15 +115,15 @@ const clearUserSession = async(sessionId)=>{
     await db.delete(sessionTable).where(eq(sessionTable.id, sessionId));
 }
 
-export const logout = (req,res)=>{
-    req.session.destroy(err => {
+export const logout = async(req,res)=>{
+    req.session.destroy(async err => {
         if(err){
             console.error('Failed to destroy session:', err);
         }
         const refresh_token = req.cookies.refresh_token;
         const decodedRefreshCode = jwt.verify(refresh_token, process.env.JWT_SECRET);
         let sessionId = decodedRefreshCode.sessionId;
-        clearUserSession(sessionId);
+        await clearUserSession(sessionId);
         res.clearCookie('access_token');
         res.clearCookie('refresh_token');
         res.cookie('is_logged_in',false);
@@ -151,11 +150,20 @@ export const register = async(req,res)=>{
         req.flash('register_status',status_info.status);
         req.flash("register_msg", status_info.msg);
         await login(req,res,{'email':data.email, 'password':data.password});
-        return res.redirect("/");
+        return ;
     }catch(e){
         console.log(e);
         req.flash('register_status','failure');
         req.flash("register_msg", e.message || 'Registration failed!');
         return res.redirect('/registration');
     }
+}
+
+const get_verify_email_page = async(req, res)=>{
+    return res.render('auth/verifyEmail',{email: req.user?.email||'', successMessage:"", errorMessage:""});
+}
+
+export const email_verify = async(req,res)=>{
+    await get_verify_email_page(req,res);
+    return 
 }

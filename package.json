@@ -7,7 +7,9 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx drizzle-kit migrate && node app.js",
+    "migrate": "npx drizzle-kit migrate"
   },
   "dependencies": {
     "argon2": "^0.43.1",

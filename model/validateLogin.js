@@ -17,11 +17,7 @@ export const validate_login = async(email, password)=>{
         let data = await db.select().from(users).where(eq(users.email, email));
         if(data.length > 0) {
             if(await check_password(password, data[0].password)){
-                return [true, 'User authenticated!', {
-                    'id': data[0].id, 
-                    'name': data[0].name, 
-                    'email': data[0].email
-                }];
+                return [true, 'User authenticated!', data[0]];
             }else{
                 return [false, 'Password incorect!', {}];
             }

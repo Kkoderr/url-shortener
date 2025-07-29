@@ -1,11 +1,14 @@
 import { relations } from "drizzle-orm";
 import { mysqlTable, varchar, text, int, timestamp, boolean } from "drizzle-orm/mysql-core";
+import { sql } from "drizzle-orm";
 
 export const users = mysqlTable("users", {
     id: int("id").notNull().primaryKey().autoincrement(),
     name: varchar("name",{length:255}).notNull(),
     email: text("email").notNull(),
     password: text('password').notNull(),
+    isVerified: boolean('is_verified').default(false),
+    profilePic: text('profile_pic'),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull().onUpdateNow()
 });
@@ -33,6 +36,16 @@ export const mapping2 = mysqlTable('mapping2',{
     })
 });
 
+export const emailVerificationTable = mysqlTable('email_verification',{
+    id: int('id').notNull().autoincrement().primaryKey(),
+    user_id: int('user_id').notNull().references(()=>users.id,{
+        onDelete: "cascade",
+        onUpdate: 'cascade'
+    }),
+    token: varchar('token',{length:255}).notNull(),
+    expiresAt: timestamp("expires_at").notNull().default(sql`(CURRENT_TIMESTAMP + INTERVAL 1 DAY)`),
+})
+
 export const userRelation = relations(
     users, 
     ({many})=>({
@@ -56,7 +69,17 @@ export const sessionRelation = relations(
     ({one})=>({
         users: one(users, {
             fields: [sessionTable.user_id],
-            references: [sessionTable.id]
+            references: [users.id]
+        })
+    })
+);
+
+export const emailVerificationTableRelation = relations(
+    emailVerificationTable,
+    ({one})=>({
+        users: one(users, {
+            fields:[emailVerificationTable.user_id],
+            references:[users.id]
         })
     })
 );

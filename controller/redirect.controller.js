@@ -19,7 +19,8 @@ export const redirect_controller = async(req, res)=>{
 export const home_redirect = async(req, res)=>{
     const is_logged_in = req.cookies?.is_logged_in === 'true';
     const email = req.user?.email || "";
-    console.log(is_logged_in);
+    // console.log(is_logged_in);
+    // console.log(req.user)
     if(is_logged_in !== true){
         res.render('index',{links:[], is_logged_in, email});
     }else{

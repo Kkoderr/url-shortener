@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Verify Your Email</title>
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet">
+  <link 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    rel="stylesheet">
+  <style>
+    body {
+        background: linear-gradient(135deg,  #edf4e8, #d7e6ed);
+    }
+    .card {
+      max-width: 400px;
+      margin: auto;
+    }
+    .main-container{
+        height: 100vh;
+    }
+  </style>
+</head>
+<body>
+    <div class="main-container d-flex justify-content-center align-items-center">
+        <div class="container">
+          <div class="card shadow rounded-4">
+            <div class="card-body text-center">
+              <h3 class="mb-3 text-primary">
+                <i class="fa-solid fa-envelope-circle-check"></i> Email Verification
+              </h3>
+              <hr>
+              <br>        
+              <% if (errorMessage) { %>
+                <div class="alert alert-danger d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-circle-exclamation"></i> <%= errorMessage %>
+                </div>
+              <% } %>
+              <% if (successMessage) { %>
+                <div class="alert alert-success d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-check-circle"></i> <%= successMessage %>
+                </div>
+              <% } %>
+      
+              <form action="/verify-email" method="POST" class="mb-3">
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    name="token" 
+                    class="form-control" 
+                    placeholder="Enter 8 digit verification code"
+                    required
+                  >
+                  <button type="submit" class="btn btn-primary">
+                    Verify
+                  </button>
+                </div>
+              </form>
+      
+              <form action="/resend-verification-email" method="POST">
+                <button type="submit" class="btn btn-link btn-sm">
+                  Didn't get the email? Resend verification
+                </button>
+              </form>
+              
+              <a href="/" class="btn btn-outline-secondary btn-sm mt-3">← Back</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
+</html>
