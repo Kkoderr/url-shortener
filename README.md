@@ -1,130 +1,195 @@
-# 📦 URL Shortener
+📦 URL Shortener
 
-A modern, secure, and personal URL shortening service built with **Node.js**, **Express**, **EJS**, **MySQL (via Drizzle ORM)**, and **JWT authentication**.  
+A modern, secure, and personal URL shortening service built with Node.js, Express, EJS, MySQL (via Drizzle ORM), and JWT authentication.
+
 Features include user authentication, link management dashboard, profile customization with profile pictures, and email verification.
 
-![Screenshot](https://github.com/Kkoderr/url-shortener/assets/screenshot.png) 
+📑 Table of Contents
 
----
+Features
 
-## 🚀 Features
+Tech Stack
 
-✅ User registration and login  
-✅ JWT-based authentication with access & refresh tokens  
-✅ Email verification system  
-✅ Personal profile page with profile picture upload  
-✅ Manage your shortened links: edit & delete  
-✅ EJS templating with Bootstrap styling  
-✅ Secure password hashing  
-✅ Session management via database  
-✅ Clean, modular folder structure
+Project Structure
 
----
+Setup & Installation
 
-## 🛠️ Tech Stack
+Environment Variables
 
-- Node.js
-- Express.js
-- MySQL + Drizzle ORM
-- JWT (jsonwebtoken)
-- EJS
-- Bootstrap 5
-- bcrypt
-- dotenv
+Usage
 
----
+Future Enhancements
 
-## 📂 Project Structure
+License
 
-bash```
+🚀 Features
+
+✅ User Management: Secure user registration and login.
+
+✅ Authentication: JWT-based auth with access & refresh tokens plus secure password hashing (bcrypt).
+
+✅ Verification: Email verification system for new accounts.
+
+✅ Profiles: Personal profile pages with image upload capabilities.
+
+✅ Dashboard: Create, edit, and delete shortened links easily.
+
+✅ Styling: Responsive UI built with EJS templating and Bootstrap 5.
+
+✅ Database: Robust session management and data storage via MySQL.
+
+✅ Codebase: Clean, modular folder structure for easy scalability.
+
+🛠️ Tech Stack
+
+Component
+
+Technology
+
+Runtime
+
+Node.js
+
+Framework
+
+Express.js
+
+Database
+
+MySQL
+
+ORM
+
+Drizzle ORM
+
+Templating
+
+EJS
+
+Styling
+
+Bootstrap 5
+
+Auth
+
+JSON Web Tokens (JWT) & bcrypt
+
+Config
+
+dotenv
+
+📂 Project Structure
+
 url-shortener/
+├── controller/       # Route controllers (logic)
+├── middlewares/      # Auth, upload, & verification middlewares
+├── model/            # DB models & data access layer
+├── routes/           # Application and authentication routes
+├── services/         # Token generation and helper services
+├── views/            # EJS templates
+│   └── profile/      # Profile-specific views
+├── public/           # Static assets (images, CSS, JS)
+├── drizzle.config.js # Drizzle ORM configuration
+├── server.js         # Application entry point
+└── package.json      # Dependencies and scripts
 
-├── controller/ # Route controllers
 
-├── middlewares/ # Auth & verification middlewares
+⚙️ Setup & Installation
 
-├── model/ # DB models & data access
+Follow these steps to run the project locally.
 
-├── routes/ # App and auth routes
+1. Clone the repository
 
-├── services/ # Token generation and helper services
-
-├── views/ # EJS templates
-
-│ └── profile/ # Profile-related views
-
-├── public/ # Static assets & CSS
-
-├── drizzle.config.js # Drizzle ORM config
-
-├── server.js # Entry point
-
-└── package.json
-```
----
-
-## ⚙️ Setup & Installation
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/Kkoderr/url-shortener.git
+git clone [https://github.com/Kkoderr/url-shortener.git](https://github.com/Kkoderr/url-shortener.git)
 cd url-shortener
-```
-2. **Install dependencies**
 
-```bash
+
+2. Install dependencies
+
 npm install
-```
-3. **Configure environment variables**
 
-Create a .env file:
 
-```bash
-JWT_SECRET=your_secret_key
+3. Database Setup
+
+Ensure you have MySQL installed and running.
+
+Create a database named url_shortener.
+
+Run migrations using Drizzle ORM (or import your schema manually).
+
+4. Configure Environment Variables
+
+Create a .env file in the root directory and add the following:
+
+JWT_SECRET=your_super_secret_key_here
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=your_password
+DB_PASSWORD=your_mysql_password
 DB_NAME=url_shortener
-```
+PORT=3000
 
-4. **Setup database**
 
-- Create MySQL database: url_shortener
-- Run migrations using Drizzle ORM (or import existing schema).
+5. Run the server
 
-5. **Run the server**
-
-```bash
+# Start the server
 npm start
-```
 
-## ✨ Usage
+# Or if using nodemon for development
+npm run dev
 
-- Register and verify your email.
-- Upload a profile picture.
-- Create, edit, and delete your shortened links.
-- Use your short links directly.
 
-## 📌 Screenshots
+Server will start at http://localhost:3000 (or your defined port).
 
-Add screenshots or GIFs to showcase:
-- Registration & Login page
-- Profile page with upload
-- Email verification badge
-- Link management dashboard
+✨ Usage
 
-## 🧰 Future Enhancements
+Register: Create an account on the sign-up page.
 
-- Link analytics (clicks, referrers)
-- Expiry & one-time links
-- Social login (Google, GitHub)
-- Improved UI with React or Next.js frontend
+Verify: Check your email (or console logs if in dev mode) to verify your account.
 
-## 📝 License
-This project is licensed under the MIT License.
+Profile: Navigate to your profile to upload a profile picture.
 
-## 🙌 Acknowledgements
+Shorten: Go to the dashboard, paste a long URL, and generate a short link.
+
+Manage: Edit or delete links directly from the dashboard list.
+
+📌 Screenshots
+
+Note: Please update the repository with actual screenshots in an /assets folder.
+
+Login Page
+
+Dashboard
+
+
+
+
+
+🧰 Future Enhancements
+
+[ ] Analytics: Track clicks, geographic location, and referrers.
+
+[ ] Expiry: Set expiration dates for temporary links.
+
+[ ] Social Login: OAuth integration (Google, GitHub).
+
+[ ] API: RESTful API endpoints for external usage.
+
+[ ] Frontend Upgrade: Migration to React.js or Next.js.
+
+🙌 Acknowledgements
+
 Built and maintained by @Kkoderr.
 Inspired by modern URL shorteners and powered by open-source tools.
 
-Feel free to ⭐ the repo if you like it, and contributions are always welcome!
+📝 License
+
+This project is licensed under the MIT License.
+
+<p align="center">
+
+
+
+
+
+Don't forget to ⭐ the repo if you found this useful!
+</p>
