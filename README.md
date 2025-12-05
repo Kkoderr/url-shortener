@@ -35,6 +35,7 @@ Features include user authentication, link management dashboard, profile customi
 ---
 
 ## 📂 Project Structure
+
 bash```
 url-shortener/
 
