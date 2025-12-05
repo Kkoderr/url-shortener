@@ -35,7 +35,7 @@ Features include user authentication, link management dashboard, profile customi
 ---
 
 ## 📂 Project Structure
-
+bash```
 url-shortener/
 
 ├── controller/ # Route controllers
@@ -59,7 +59,7 @@ url-shortener/
 ├── server.js # Entry point
 
 └── package.json
-
+```
 ---
 
 ## ⚙️ Setup & Installation
